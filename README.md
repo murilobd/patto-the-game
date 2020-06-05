@@ -1,3 +1,5 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/5f3756f4-5354-4938-8ffe-10e958abff70/deploy-status)](https://app.netlify.com/sites/patto-the-game/deploys)
+
 # Phaser 3 Webpack Project Template
 
 A Phaser 3 project template with ES6 support via [Babel 7](https://babeljs.io/) and [Webpack 4](https://webpack.js.org/)
