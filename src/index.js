@@ -83,15 +83,18 @@ function create() {
 	this.physics.add.collider(player, platforms); // adds collision between player and platforms
 
 	cursors = this.input.keyboard.createCursorKeys();
+
+	createButtons();
 }
 
 let lastKey = "right";
+let mouseover = null;
 function update() {
-	if (cursors.left.isDown) {
+	if (cursors.left.isDown || mouseover === "left") {
 		lastKey = "left";
 		player.setVelocityX(-160);
 		player.anims.play("left", true);
-	} else if (cursors.right.isDown) {
+	} else if (cursors.right.isDown || mouseover == "right") {
 		lastKey = "right";
 		player.setVelocityX(160);
 		player.anims.play("right", true);
@@ -108,4 +111,34 @@ function update() {
 		if (lastKey == "left") player.anims.play("jumpL");
 		else player.anims.play("jumpR");
 	}
+}
+
+function createButtons() {
+	const mainDiv = document.createElement("div");
+	const buttons = ["left", "right", "up"];
+	const translation = {
+		left: "esquerda",
+		right: "direita",
+		up: "pular",
+	};
+	for (const btn of buttons) {
+		const _btn = document.createElement("button");
+		_btn.id = btn;
+		_btn.innerText = translation[btn];
+		_btn.addEventListener("mouseover", (event) => {
+			const id = event.target.id;
+			if (id === "up") {
+				if (player.body.touching.down) {
+					player.setVelocityY(-330);
+				}
+			} else {
+				mouseover = id;
+			}
+		});
+		_btn.addEventListener("mouseleave", () => {
+			mouseover = null;
+		});
+		mainDiv.append(_btn);
+	}
+	document.body.appendChild(mainDiv);
 }
